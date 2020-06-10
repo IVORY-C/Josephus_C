@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <assert.h>
 
-#include "..\..\domain\shared\person.c"
+#include "..\..\domain\shared\person.h"
 
 int main(){
     struct Person person_one = {"Lisa", 12, "female"};
