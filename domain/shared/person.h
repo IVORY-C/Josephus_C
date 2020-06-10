@@ -1,5 +1,6 @@
 #include <stdio.h>
-
+#ifndef _COMMON 
+#define _COMMON 
 
 struct Person
 {
@@ -7,5 +8,8 @@ struct Person
     int age;
     char *gender; 
 };
+
+#endif 
+
 
 
