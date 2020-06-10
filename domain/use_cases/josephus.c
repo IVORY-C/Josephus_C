@@ -1,13 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int output_josephus_order(int size, int start, int step){
+int *output_josephus_order(int size, int start, int step){
     int index = start % size;
     int current = 1;
     int count = 0;
 
     int flag[100] = {0};
-    int outs[100] = {0};
+    int *outs = (int *)malloc(size*sizeof(int));
 
     while(count < size){
         if(current == step){
@@ -23,8 +23,6 @@ int output_josephus_order(int size, int start, int step){
         }
     }
 
-    for(count=0; count<size; count++){
-        printf("%d ", outs[count]);
-    }
+    return outs;
 
 }
