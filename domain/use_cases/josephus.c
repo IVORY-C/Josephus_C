@@ -71,7 +71,8 @@ int josephus_quary(Josephus* self){
 
     for(int i = 0; i < self->number; i++){
         Person someone = self->people[i];
-        printf("number: %d, name: %s, age: %d, gender: %s\n", i+1, someone.name, someone.age, someone.gender);
+        printf("number: %d, name: %s, age: %d, gender: %s\n", 
+            i+1, someone.name, someone.age, someone.gender);
     }
 
     return SUCCESS;
@@ -79,8 +80,6 @@ int josephus_quary(Josephus* self){
 
 int josephus_input_people(Josephus* self, Person* inputs){
     for(int i = 0; i < self->number; i++){
-        Person someone = inputs[i];
-
         if(self->number == MAX){
             printf("The number is over MAX!\n");
             break;
