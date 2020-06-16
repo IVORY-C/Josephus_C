@@ -35,8 +35,8 @@ int person_destroy(Person* self){
 }
 
 //line = "name, age, gender"
-int person_create_from_string(char* line, Person* someone){
-    char index[20];
+int person_create_from_string(Person* self, char* line){
+    char index[20] = {0};
     char* data[3];
     for(int i = 0; i < 3; i++){
         data[i] = (char*)malloc(sizeof(char*));
@@ -46,7 +46,7 @@ int person_create_from_string(char* line, Person* someone){
     int count_index = 0;
 
     for(int i = 0; i < strlen(line) + 1; i++){
-        if(line[i] == ' '){
+        if(line[i] == ' ' || line[i] == '\n'){
             continue;
         }
         
@@ -70,7 +70,7 @@ int person_create_from_string(char* line, Person* someone){
     int age = atoi(data[1]);//to do: try
     char* gender = data[2];
     
-    person_new(someone, name, age, gender);
+    person_new(self, name, age, gender);
 
     for(int i=0; i<3; i++){
         free(data[i]);
@@ -80,7 +80,7 @@ int person_create_from_string(char* line, Person* someone){
 }
 
 int person_print_data(Person* self){
-    printf("name: %s, age: %d, gender: %s",
+    printf("name: %s, age: %d, gender: %s\n",
         self->name, self->age, self->gender);
 
     return SUCCESS;
