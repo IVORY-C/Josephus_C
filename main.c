@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "domain/shared/person.h"
-#include "domain/use_cases/josephus.h"
-#include "domain/adapter/readers.h"
+#include "domain/person.h"
+#include "domain/josephus.h"
+#include "domain/readers.h"
 
 
 int main() {
@@ -20,8 +20,13 @@ int main() {
     Josephus ring;
     josephus_new(&ring, 2, 2, 5);
     josephus_input_people(&ring, people);
+
+    printf("%s", "The input people:\n");
     josephus_quary(&ring); 
-    printf("%s", "---------------");
+
+    printf("%s", "---------------\n");
+
+    printf("%s", "The output results:\n");
     josephus_output_results(&ring, results);
 
     for(int i = 0; i < ring.number; i++){
