@@ -25,8 +25,11 @@ int josephus_new(Josephus* self, int start, int step, int number){
         return INVALID_STEP;
     }
 
+    self->start = (int)malloc(sizeof(int));
     self->start = start;
+    self->step = (int)malloc(sizeof(int));
     self->step = step;
+    self->number = (int)malloc(sizeof(int));
     self->number = number;
     self->people = (Person* )malloc(MAX * sizeof(Person));
 
