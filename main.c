@@ -10,7 +10,8 @@ int main() {
     int start = 2;
     int step = 2;
     int number = 5;
-    char* path = (char*)"data/people.csv";
+    char* path = (char*)malloc(100*sizeof(char));
+    path = "data/people.csv";
 
     Person people[100];
     Person results[100];
@@ -18,7 +19,7 @@ int main() {
     readers_create_people_from_txt_or_csv(people, path);
 
     Josephus* ring = (Josephus*)malloc(sizeof(Josephus*));
-    josephus_new(ring, 2, 2, 5);
+    josephus_new(ring, start, step, number);
     josephus_input_people(ring, people);
 
     printf("%s", "The input people:\n");

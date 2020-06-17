@@ -18,8 +18,8 @@ int person_new(Person* self, const char* name, int age, const char* gender){
         return INVALID_GENDER;
     }
     
-    self->name = (char*)malloc(sizeof(char*));
-    self->gender = (char*)malloc(sizeof(char*));
+    self->name = (char*)malloc(256*sizeof(char));
+    self->gender = (char*)malloc(256*sizeof(char));
 
     strcpy(self->name, name);
     self->age = age;
@@ -80,7 +80,7 @@ int person_create_from_string(Person* self, char* line){
 }
 
 int person_print_data(Person* self){
-    printf("name: %s, age: %d, gender: %s\n",
+    printf("Name: %s, Age: %d, Gender: %s\n",
         self->name, self->age, self->gender);
 
     return SUCCESS;

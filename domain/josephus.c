@@ -25,13 +25,10 @@ int josephus_new(Josephus* self, int start, int step, int number){
         return INVALID_STEP;
     }
 
-    self->start = (int)malloc(sizeof(int));
     self->start = start;
-    self->step = (int)malloc(sizeof(int));
     self->step = step;
-    self->number = (int)malloc(sizeof(int));
     self->number = number;
-    self->people = (Person* )malloc(MAX * sizeof(Person));
+    self->people = (Person*)malloc(MAX * sizeof(Person));
 
     return SUCCESS;
 }
@@ -57,7 +54,7 @@ int josephus_pop(Josephus* self, int pop_number){
     }
 
     Person pop_person = self->people[pop_number-1];
-    printf("pop number: %d;\nname: %s, age: %d, gender: %s\n", pop_person.name, pop_person.age, pop_person.gender);
+    printf("Pop number: %d;\nName: %s, Age: %d, Gender: %s\n", pop_person.name, pop_person.age, pop_person.gender);
 
     for(int i = pop_number-1; i < self->number-1; i++){
         self->people[i] = self->people[i+1];
@@ -73,7 +70,7 @@ int josephus_quary(Josephus* self){
 
     for(int i = 0; i < self->number; i++){
         Person someone = self->people[i];
-        printf("number: %d, name: %s, age: %d, gender: %s\n", 
+        printf("Number: %d, Name: %s, Age: %d, Gender: %s\n", 
             i+1, someone.name, someone.age, someone.gender);
     }
 
