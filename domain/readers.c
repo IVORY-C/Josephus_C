@@ -3,7 +3,6 @@
 #include <string.h>
 
 #include "readers.h"
-#include "..\shared\person.h"
 
 #define SUCCESS 1
 #define FAILURE 0

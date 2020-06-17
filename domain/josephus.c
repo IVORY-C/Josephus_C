@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "../shared/person.h"
 #include "josephus.h"
 
 #define MAX 100

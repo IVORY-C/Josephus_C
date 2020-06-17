@@ -1,7 +1,7 @@
 #ifndef JOSEPHUS_H
 #define JOSEPHUS_H
 
-#include "../shared/person.h"
+#include "person.h"
 
 typedef struct josephus
 {
