@@ -2,14 +2,23 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "values.h"
 #include "person.h"
 
-#define SUCCESS 1
-#define FAILURE 0
-#define INVALID_AGE -1
-#define INVALID_GENDER -2
+struct Person
+{
+    char *name;
+    int age;
+    char *gender; 
+};
 
-int person_new(Person* self, const char* name, int age, const char* gender){
+int person_init(Person *self){
+    self->name = (char*)malloc(256 * sizeof(char));
+    self->gender = (char*)malloc(256 * sizeof(char));
+    return SUCCESS;
+}
+
+int person_set(Person *self, const char *name, int age, const char *gender){
     if(age < 0){
         return INVALID_AGE;
     }
@@ -18,9 +27,6 @@ int person_new(Person* self, const char* name, int age, const char* gender){
         return INVALID_GENDER;
     }
     
-    self->name = (char*)malloc(256*sizeof(char));
-    self->gender = (char*)malloc(256*sizeof(char));
-
     strcpy(self->name, name);
     self->age = age;
     strcpy(self->gender, gender);
@@ -28,18 +34,30 @@ int person_new(Person* self, const char* name, int age, const char* gender){
     return SUCCESS;
 }
 
-int person_destroy(Person* self){
+char *person_get_name(Person *self){
+    return self->name;
+}
+
+int person_get_age(Person *self){
+    return self->age;
+}
+
+char *person_get_gender(Person *self){
+    return self->gender;
+}
+
+int person_destroy(Person *self){
     free(self->name);
     free(self->gender);
     return SUCCESS;
 }
 
 //line = "name, age, gender"
-int person_create_from_string(Person* self, char* line){
+int person_create_from_string(Person *self, char *line){
     char index[20] = {0};
-    char* data[3];
+    char *data[3];
     for(int i = 0; i < 3; i++){
-        data[i] = (char*)malloc(sizeof(char*));
+        data[i] = (char *)malloc(sizeof(char));
     }
 
     int count_data = 0;
@@ -66,11 +84,12 @@ int person_create_from_string(Person* self, char* line){
         }
     }
 
-    char* name = data[0];
+    char *name = data[0];
     int age = atoi(data[1]);//to do: try
-    char* gender = data[2];
+    char *gender = data[2];
     
-    person_new(self, name, age, gender);
+    person_init(self);
+    person_set(self, name, age, gender);
 
     for(int i=0; i<3; i++){
         free(data[i]);
@@ -79,7 +98,7 @@ int person_create_from_string(Person* self, char* line){
     return SUCCESS;
 }
 
-int person_print_data(Person* self){
+int person_print_data(Person *self){
     printf("Name: %s, Age: %d, Gender: %s\n",
         self->name, self->age, self->gender);
 

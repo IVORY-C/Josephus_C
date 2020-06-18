@@ -1,18 +1,29 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "values.h"
+#include "person.h"
 #include "josephus.h"
 
-#define MAX 100
-#define SUCCESS 1
-#define FAILURE 0
-#define INVALID_START -1
-#define INVALID_STEP -2
-#define INVALID_NUMBER -3
+struct Josephus
+{
+    int start;
+    int step;
+    int number;
+    Person **people;
+};
 
 //所有计数都从1开始
 
-int josephus_new(Josephus* self, int start, int step, int number){
+int josephus_init(Josephus *self){
+    self->people = (Person **)malloc(MAX * sizeof(Person *));
+    for(int i = 0; i< MAX; i++){
+        person_init(self->people[i]);
+    }//是否需要？
+    return SUCCESS;
+}
+
+int josephus_set(Josephus *self, int start, int step, int number){
     if(number < 1 || number > MAX){
         return INVALID_NUMBER;
     }
@@ -28,17 +39,19 @@ int josephus_new(Josephus* self, int start, int step, int number){
     self->start = start;
     self->step = step;
     self->number = number;
-    self->people = (Person*)malloc(MAX * sizeof(Person));
 
     return SUCCESS;
 }
 
-int josephus_destroy(Josephus* self){
+int josephus_destroy(Josephus *self){
+    for(int i = 0; i< MAX; i++){
+        person_destroy(self->people[i]);
+    }
     free(self->people);
     return SUCCESS;
 }
 
-int josephus_append(Josephus* self, Person someone){
+int josephus_append(Josephus *self, Person *someone){
     if(self->number == MAX){
         return FAILURE;
     }
@@ -48,13 +61,15 @@ int josephus_append(Josephus* self, Person someone){
     return SUCCESS;
 }
 
-int josephus_pop(Josephus* self, int pop_number){
+int josephus_pop(Josephus *self, int pop_number){
     if(self->number < 1){
         return FAILURE;
     }
 
-    Person pop_person = self->people[pop_number-1];
-    printf("Pop number: %d;\nName: %s, Age: %d, Gender: %s\n", pop_person.name, pop_person.age, pop_person.gender);
+    Person *pop_person = self->people[pop_number-1];
+
+    printf("Pop number: %d;\nName: %s, Age: %d, Gender: %s\n", 
+        pop_number, person_get_name(pop_person), person_get_age(pop_person), person_get_gender(pop_person));
 
     for(int i = pop_number-1; i < self->number-1; i++){
         self->people[i] = self->people[i+1];
@@ -63,25 +78,37 @@ int josephus_pop(Josephus* self, int pop_number){
     return SUCCESS;
 }
 
-int josephus_quary(Josephus* self){
+int josephus_quary(Josephus *self){
     if(self->number == 0){
         return FAILURE;
     }
 
     for(int i = 0; i < self->number; i++){
-        Person someone = self->people[i];
+        Person *someone = self->people[i];
         printf("Number: %d, Name: %s, Age: %d, Gender: %s\n", 
-            i+1, someone.name, someone.age, someone.gender);
+            i+1, person_get_name(someone), person_get_age(someone), person_get_gender(someone));
     }
 
     return SUCCESS;
 }
 
-int josephus_input_people(Josephus* self, Person* inputs){
+int josephus_get_start(Josephus *self){
+    return self->start;
+}
+
+int josephus_get_step(Josephus *self){
+    return self->step;
+}
+
+int josephus_get_number(Josephus *self){
+    return self->number;
+}
+
+int josephus_input_people(Josephus *self, Person **inputs){
     for(int i = 0; i < self->number; i++){
         if(self->number == MAX){
             printf("The number is over MAX!\n");
-            break;
+            return FAILURE;
         }
 
         self->people[i] = inputs[i];
@@ -90,7 +117,7 @@ int josephus_input_people(Josephus* self, Person* inputs){
     return SUCCESS;
 }
 
-int josephus_output_results(Josephus* self, Person* results){
+int josephus_output_results(Josephus *self, Person **results){
     int current = self->start - 1;
     int count = 1;//计数到step归零
     int results_number = 0;
@@ -101,7 +128,7 @@ int josephus_output_results(Josephus* self, Person* results){
         if(count == self->step){
             count = 0;
 
-            Person someone = self->people[current];
+            Person *someone = self->people[current];
             results[results_number] = someone;
             results_number++;
 
