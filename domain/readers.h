@@ -1,8 +1,8 @@
 #ifndef READERS_H
 #define READERS_H
 
-#include "person.h"
+#include "values.h"
 
-int readers_create_people_from_txt_or_csv(Person* people, char* path);
+int readers_create_people_from_txt_or_csv(Person **people, char *path);
 
 #endif
