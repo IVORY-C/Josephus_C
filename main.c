@@ -10,15 +10,15 @@ int main(){
     int start = 2;
     int step = 2;
     int number = 5;
-    char *path = (char *)malloc(100 * sizeof(char));
+    char *path = (char *)malloc(MAX * sizeof(char));
     path = "data/people.csv";
 
     Person **people = (Person **)malloc(number * sizeof(Person*));
     for(int i; i < number; i++){
         person_init(people[i]);
-    }//只有people里边含有具体数据，别的数组均仅包含指针。
+    }//只有people里含有具体数据,需分配Person的空间，别的数组均仅包含指针。
 
-    Person **results = (Person **)malloc(number * sizeof(Person*));
+    Person **results = (Person **)malloc(number * sizeof(Person *));
 
     readers_create_people_from_txt_or_csv(people, path);
     
