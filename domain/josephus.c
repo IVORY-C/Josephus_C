@@ -122,7 +122,10 @@ int josephus_output_results(Josephus *self, Person **results){
     int count = 1;//计数到step归零
     int results_number = 0;
 
-    int flag[MAX] = {0};
+    int *flag = (int *)malloc(self->number * sizeof(int));
+    for(int i = 0; i < self->number; i++){
+        flag[i] = 0;
+    }
 
     while(results_number < self->number){
         if(count == self->step){
@@ -141,5 +144,7 @@ int josephus_output_results(Josephus *self, Person **results){
         }
     }
 
+    free(flag);
+    
     return SUCCESS;
 }
