@@ -1,11 +1,10 @@
 #ifndef JOSEPHUS_H
 #define JOSEPHUS_H
 
-#include "macro.h"
-#include "person.h"
-
 
 typedef struct Josephus SJosephus;//incomplete type
+
+struct SPerson;
 
 int josephus_init(SJosephus *self);
 

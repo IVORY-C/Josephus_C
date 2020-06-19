@@ -2,12 +2,10 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "values.h"
+#include "macro.h"
 #include "person.h"
-#include "readers.h"
+#include "readers.h"s
 
-#define SUCCESS 1
-#define FAILURE 0
 int readers_create_people_from_txt_or_csv(SPerson **people, char *path){
     FILE *fp = fopen(path, "r");
     char *buffer = (char *)malloc(256 * sizeof(char));

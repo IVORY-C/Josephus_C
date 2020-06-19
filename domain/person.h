@@ -1,8 +1,6 @@
 #ifndef PERSON_H
 #define PERSON_H
 
-#include "macro.h"
-
 typedef struct Person SPerson;
 
 int person_init(SPerson *self);

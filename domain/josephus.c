@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "values.h"
+#include "macro.h"
 #include "person.h"
 #include "josephus.h"
 
