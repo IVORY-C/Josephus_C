@@ -12,9 +12,9 @@ struct Person
     char *gender; 
 };
 
-int person_init(SPerson *self){
-    self->name = (char *)malloc(256 * sizeof(char));
-    self->gender = (char *)malloc(256 * sizeof(char));
+int person_create(SPerson *self){
+    self->name = (char *)malloc(MAX_CHAR * sizeof(char));
+    self->gender = (char *)malloc(MAX_CHAR * sizeof(char));
     return SUCCESS;
 }
 

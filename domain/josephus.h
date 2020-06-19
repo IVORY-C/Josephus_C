@@ -6,7 +6,7 @@ typedef struct Josephus SJosephus;//incomplete type
 
 struct SPerson;
 
-int josephus_init(SJosephus *self);
+int josephus_create(SJosephus *self);
 
 int josephus_set(SJosephus *self, int start, int step, int number);
 

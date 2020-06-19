@@ -3,7 +3,7 @@
 
 typedef struct Person SPerson;
 
-int person_init(SPerson *self);
+int person_create(SPerson *self);
 
 int person_set(SPerson *self, const char *name, int age, const char *gender);
 

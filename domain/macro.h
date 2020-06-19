@@ -2,6 +2,7 @@
 #define MACRO_H
 
 #define MAX 100
+#define MAX_CHAR 100
 #define SUCCESS 1
 #define FAILURE 0
 #define INVALID_AGE -1

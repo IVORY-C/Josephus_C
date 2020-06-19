@@ -15,11 +15,11 @@ struct Josephus
 
 //所有计数都从1开始
 
-int josephus_init(SJosephus *self){
+int josephus_create(SJosephus *self){
     self->people = (SPerson **)malloc(MAX * sizeof(SPerson *));
-    for(int i = 0; i< MAX; i++){
-        person_init(self->people[i]);
-    }//是否需要？
+    // for(int i = 0; i< MAX; i++){
+    //     self->people[i] = (SPerson *)malloc(sizeof(SPerson *));
+    // }
     return SUCCESS;
 }
 
@@ -44,9 +44,9 @@ int josephus_set(SJosephus *self, int start, int step, int number){
 }
 
 int josephus_destroy(SJosephus *self){
-    for(int i = 0; i< MAX; i++){
-        person_destroy(self->people[i]);
-    }
+    // for(int i = 0; i< MAX; i++){
+    //     person_destroy(self->people[i]);
+    // }
     free(self->people);
     return SUCCESS;
 }
