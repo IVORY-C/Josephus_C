@@ -10,19 +10,19 @@ int main(){
     int start = 2;
     int step = 2;
     int number = 5;
-    char *path = (char *)malloc(MAX * sizeof(char));
+    char *path = (char *)malloc(100 * sizeof(char));
     path = "data/people.csv";
 
-    Person **people = (Person **)malloc(number * sizeof(Person*));
+    SPerson **people = (SPerson **)malloc(number * sizeof(SPerson*));
     for(int i; i < number; i++){
         person_init(people[i]);
     }//只有people里含有具体数据,需分配Person的空间，别的数组均仅包含指针。
 
-    Person **results = (Person **)malloc(number * sizeof(Person *));
+    SPerson **results = (SPerson **)malloc(number * sizeof(SPerson *));
 
     readers_create_people_from_txt_or_csv(people, path);
     
-    Josephus *ring;
+    SJosephus *ring;
     josephus_init(ring);
     josephus_set(ring, start, step, number);
     josephus_input_people(ring, people);

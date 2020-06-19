@@ -12,13 +12,13 @@ struct Person
     char *gender; 
 };
 
-int person_init(Person *self){
-    self->name = (char*)malloc(256 * sizeof(char));
-    self->gender = (char*)malloc(256 * sizeof(char));
+int person_init(SPerson *self){
+    self->name = (char *)malloc(256 * sizeof(char));
+    self->gender = (char *)malloc(256 * sizeof(char));
     return SUCCESS;
 }
 
-int person_set(Person *self, const char *name, int age, const char *gender){
+int person_set(SPerson *self, const char *name, int age, const char *gender){
     if(age < 0){
         return INVALID_AGE;
     }
@@ -34,26 +34,26 @@ int person_set(Person *self, const char *name, int age, const char *gender){
     return SUCCESS;
 }
 
-char *person_get_name(Person *self){
+char *person_get_name(SPerson *self){
     return self->name;
 }
 
-int person_get_age(Person *self){
+int person_get_age(SPerson *self){
     return self->age;
 }
 
-char *person_get_gender(Person *self){
+char *person_get_gender(SPerson *self){
     return self->gender;
 }
 
-int person_destroy(Person *self){
+int person_destroy(SPerson *self){
     free(self->name);
     free(self->gender);
     return SUCCESS;
 }
 
 //line = "name, age, gender"
-int person_create_from_string(Person *self, char *line){
+int person_create_from_string(SPerson *self, char *line){
     char index[20] = {0};
     char *data[3];
     for(int i = 0; i < 3; i++){
@@ -98,7 +98,7 @@ int person_create_from_string(Person *self, char *line){
     return SUCCESS;
 }
 
-int person_print_data(Person *self){
+int person_print_data(SPerson *self){
     printf("Name: %s, Age: %d, Gender: %s\n",
         self->name, self->age, self->gender);
 

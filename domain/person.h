@@ -1,25 +1,25 @@
 #ifndef PERSON_H
 #define PERSON_H
 
-#include "values.h"
+#include "macro.h"
 
-typedef struct Person Person;
+typedef struct Person SPerson;
 
-int person_init(Person *self);
+int person_init(SPerson *self);
 
-int person_set(Person *self, const char *name, int age, const char *gender);
+int person_set(SPerson *self, const char *name, int age, const char *gender);
 
-int person_destroy(Person *self);
+int person_destroy(SPerson *self);
 
-char *person_get_name(Person *self);
+char *person_get_name(SPerson *self);
 
-int person_get_age(Person *self);
+int person_get_age(SPerson *self);
 
-char *person_get_gender(Person *self);
+char *person_get_gender(SPerson *self);
 
-int person_create_from_string(Person *self, char *line);
+int person_create_from_string(SPerson *self, char *line);
 
-int person_print_data(Person *self); 
+int person_print_data(SPerson *self); 
 #endif 
 
 

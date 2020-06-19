@@ -1,31 +1,32 @@
 #ifndef JOSEPHUS_H
 #define JOSEPHUS_H
 
-#include "values.h"
+#include "macro.h"
 #include "person.h"
 
-typedef struct Josephus Josephus;
 
-int josephus_init(Josephus *self);
+typedef struct Josephus SJosephus;//incomplete type
 
-int josephus_set(Josephus *self, int start, int step, int number);
+int josephus_init(SJosephus *self);
 
-int josephus_destroy(Josephus *self);
+int josephus_set(SJosephus *self, int start, int step, int number);
 
-int josephus_append(Josephus *self, Person *someone);
+int josephus_destroy(SJosephus *self);
 
-int josephus_pop(Josephus *self, int pop_number);
+int josephus_append(SJosephus *self, SPerson *someone);
 
-int josephus_quary(Josephus *self);
+int josephus_pop(SJosephus *self, int pop_number);
 
-int josephus_get_start(Josephus *self);
+int josephus_quary(SJosephus *self);
 
-int josephus_get_step(Josephus *self);
+int josephus_get_start(SJosephus *self);
 
-int josephus_get_number(Josephus *self);
+int josephus_get_step(SJosephus *self);
 
-int josephus_input_people(Josephus *self, Person **inputs);
+int josephus_get_number(SJosephus *self);
 
-int josephus_output_results(Josephus *self, Person **results);
+int josephus_input_people(SJosephus *self, SPerson **inputs);
+
+int josephus_output_results(SJosephus *self, SPerson **results);
 
 #endif

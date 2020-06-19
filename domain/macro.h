@@ -1,5 +1,5 @@
-#ifndef STRUCTURES_H
-#define STRUCTURES_H
+#ifndef MACRO_H
+#define MACRO_H
 
 #define MAX 100
 #define SUCCESS 1
