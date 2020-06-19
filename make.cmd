@@ -8,4 +8,4 @@ echo delete .o file -done
  
 ::执行编译后的文件
 main.exe
-echo run file -done
+echo run main -done

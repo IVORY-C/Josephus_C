@@ -1,8 +1,5 @@
 objects = main.o person.o josephus.o readers.o 
 
-main: $(objects)
-	gcc -o main $(objects)
-
 main.o : main.c
 	gcc -c main.c
 person.o : domain/person.c 
