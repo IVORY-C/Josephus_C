@@ -1,10 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "macro.h"
-#include "person.h"
-#include "m-array.h"
-#include "josephus.h"
+#include "../include/macro.h"
+#include "../include/person.h"
+#include "../include/m-array.h"
+#include "../include/josephus.h"
 
 struct _Josephus
 {
@@ -13,7 +13,7 @@ struct _Josephus
     int capacity;
     int number;
     int _current;
-    Person *people[MAX];
+    Person *people[100];
 };
 
 //所有计数都从1开始
@@ -22,6 +22,7 @@ struct _Josephus
 
 Josephus *josephus_create(void){
     Josephus *self = (struct _Josephus *)malloc(sizeof(struct _Josephus));
+    // self->people = (char **)malloc()
     // for(int i = 0; i < MAX; i++){
     //     self->people[i] = person_create();
     // }
@@ -59,7 +60,7 @@ int josephus_init(Josephus *self, int start, int step, int capacity){
 }
 
 int josephus_append(Josephus *self, Person *someone){
-    if(self->number == MAX){
+    if(self->number == self->capacity){
         return FAILURE;
     }
     

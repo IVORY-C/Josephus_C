@@ -6,12 +6,15 @@ main:$(objects)
 
 main.o : main.c
 	gcc -c main.c
-person.o : domain/person.c 
-	gcc -c domain/person.c	
-josephus.o : domain/josephus.h domain/person.h
-	gcc -c domain/josephus.c
-readers.o : domain/readers.c domain/person.h domain/josephus.h
-	gcc -c domain/readers.c
+
+person.o : include/person.h 
+	gcc -c src/person.c	
+
+josephus.o : include/josephus.h include/person.h
+	gcc -c src/josephus.c
+	
+readers.o : include/readers.h include/person.h include/josephus.h
+	gcc -c src/readers.c
 
 
 .PHONY : clean

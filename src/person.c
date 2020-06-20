@@ -2,8 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "macro.h"
-#include "person.h"
+#include "../include/macro.h"
+#include "../include/person.h"
 
 struct _Person
 {

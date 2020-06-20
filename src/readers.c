@@ -2,20 +2,20 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "macro.h"
-#include "readers.h"
+#include "../include/macro.h"
+#include "../include/readers.h"
 
 struct _Reader{
     int capacity;
     int number;
     char *path;
-    char **lines;
+    char *lines[100];
 };
 
 Reader *reader_create(void){
     struct _Reader *self = (struct _Reader *)malloc(sizeof(struct _Reader));
     self->path = (char *)malloc(MAX_CHAR * sizeof(char));
-    self->lines = (char **)malloc(100 * sizeof(char *));
+    // self->lines = (char **)malloc(100 * sizeof(char *));
 
     return self;
 }

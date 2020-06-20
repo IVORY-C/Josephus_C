@@ -1,11 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "domain/m-array.h"
-#include "domain/macro.h"
-#include "domain/person.h"
-#include "domain/josephus.h"
-#include "domain/readers.h"
+#include "include/m-array.h"
+#include "include/macro.h"
+#include "include/person.h"
+#include "include/josephus.h"
+#include "include/readers.h"
 
 
 int main(){
