@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "domain/m-array.h"
 #include "domain/macro.h"
 #include "domain/person.h"
 #include "domain/josephus.h"
@@ -8,45 +9,38 @@
 
 
 int main(){
-    int start = 2;
-    int step = 2;
-    int number = 5;
-    char *path = (char *)malloc(MAX_CHAR * sizeof(char));
-    path = "data/people.csv";
+    Reader *reader = reader_create();
+    reader_init(reader, 20, "data/people.csv");
+    reader_append_lines_from_file(reader);
 
-    SPerson **people = (SPerson **)malloc(number * sizeof(SPerson*));
-    for(int i; i < number; i++){
-        person_create(people[i]);
-    // }//只有people里含有具体数据,需分配Person的空间，别的数组均仅包含指针?
-
-    SPerson **results = (SPerson **)malloc(number * sizeof(SPerson *));
-
-    readers_create_people_from_txt_or_csv(people, path);
-    
-    SJosephus *ring;
-    josephus_create(ring);
-    josephus_set(ring, start, step, number);
-    josephus_input_people(ring, people);
-
-    printf("%s", "The input people:\n");
-    josephus_quary(ring); 
-
-    printf("%s", "---------------\n");
-
-    printf("%s", "The output results:\n");
-    josephus_output_results(ring, results);
-
-    for(int i = 0; i < josephus_get_number(ring); i++){
-        person_print_data(results[i]);
+    char **lines = reader_get_lines(reader);
+    printf("----------\nThe lines:\n");
+    for(int i = 0; i < reader_get_number(reader); i++){
+        printf("%s", lines[i]);
     }
-    
-    josephus_destroy(ring); 
-    free(path);
-    free(results);
-    free(people);
-    for(int i = 0; i < MAX; i++){
-        person_destroy(people[i]);
+    printf("----------\n");
+
+    Josephus *ring = josephus_create();
+    josephus_init(ring, 2, 2, 10);
+
+    for(int i = 0; i < reader_get_number(reader); i++){
+        Person *someone = person_create();
+        person_init_from_string(someone, lines[i]);
+        josephus_append(ring, someone);
     }
 
-    return 0;
+    printf("The people in ring:\n");
+    josephus_query(ring);
+    printf("----------\n");
+
+    printf("The results:\n");
+    Person *next_person = person_create();
+    while(josephus_get_number(ring) > 0){
+        next_person = josephus_output_next(ring);
+        person_print_data(next_person);
+    }
+
+    person_destroy(next_person);
+    reader_destroy(reader);
+    josephus_destroy(ring);
 }

@@ -1,23 +1,23 @@
 #ifndef PERSON_H
 #define PERSON_H
 
-typedef struct Person SPerson;
+typedef struct _Person Person;
 
-int person_create(SPerson *self);
+Person *person_create(void);
 
-int person_set(SPerson *self, const char *name, int age, const char *gender);
+int person_init(Person *self, const char *name, int age, const char *gender);
 
-int person_destroy(SPerson *self);
+int person_destroy(Person *self);
 
-char *person_get_name(SPerson *self);
+char *person_get_name(Person *self);
 
-int person_get_age(SPerson *self);
+int person_get_age(Person *self);
 
-char *person_get_gender(SPerson *self);
+char *person_get_gender(Person *self);
 
-int person_create_from_string(SPerson *self, char *line);
+int person_init_from_string(Person *self, char *line);
 
-int person_print_data(SPerson *self); 
+int person_print_data(Person *self); 
 #endif 
 
 

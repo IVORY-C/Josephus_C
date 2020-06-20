@@ -9,6 +9,6 @@
 #define INVALID_GENDER -2
 #define INVALID_START -3
 #define INVALID_STEP -4
-#define INVALID_NUMBER -5
+#define INVALID_CAPACITY -5
 
 #endif

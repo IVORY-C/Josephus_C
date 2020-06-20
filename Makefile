@@ -1,4 +1,8 @@
-objects = main.o person.o josephus.o readers.o 
+SHELL=cmd.exe
+objects = main.o person.o josephus.o readers.o
+
+main:$(objects)
+	gcc -o main $(objects)
 
 main.o : main.c
 	gcc -c main.c
@@ -9,7 +13,9 @@ josephus.o : domain/josephus.h domain/person.h
 readers.o : domain/readers.c domain/person.h domain/josephus.h
 	gcc -c domain/readers.c
 
+
 .PHONY : clean
 clean:
 	del *.o -rf
+
 
