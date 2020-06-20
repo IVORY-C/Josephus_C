@@ -9,6 +9,7 @@
 
 
 int main(){
+    // 创建reader
     Reader *reader = reader_create();
     reader_init(reader, 20, "data/people.csv");
     reader_append_lines_from_file(reader);
@@ -20,6 +21,7 @@ int main(){
     }
     printf("----------\n");
 
+    // 创建ring
     Josephus *ring = josephus_create();
     josephus_init(ring, 2, 2, 10);
 
@@ -33,6 +35,7 @@ int main(){
     josephus_query(ring);
     printf("----------\n");
 
+    // 输出结果
     printf("The results:\n");
     Person *next_person = person_create();
     while(josephus_get_number(ring) > 0){
@@ -40,6 +43,7 @@ int main(){
         person_print_data(next_person);
     }
 
+    // destroy
     person_destroy(next_person);
     reader_destroy(reader);
     josephus_destroy(ring);
