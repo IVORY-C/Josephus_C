@@ -7,25 +7,25 @@
 #include "../include/m-string.h"
 #include "../include/readers.h"
 
-ARRAY_DEF(array_lines, const char *, M_CSTR_OPLIST)
+ARRAY_DEF(array_char, const char *, M_CSTR_OPLIST)
 
 struct _Reader{
     int capacity;
     int number;
     char *path;
-    array_lines_t lines;
+    array_char_t lines;
 };
 
 Reader *reader_create(void){
     struct _Reader *self = (struct _Reader *)malloc(sizeof(struct _Reader));
     self->path = (char *)malloc(MAX_CHAR * sizeof(char));
 
-    array_lines_init(self->lines);
+    array_char_init(self->lines);
     return self;
 }
 
 int reader_destroy(Reader *self){
-    array_lines_clear(self->lines);
+    array_char_clear(self->lines);
 
     free(self->path);
     free(self);
@@ -53,7 +53,7 @@ char *reader_get_path(Reader *self){
 }
 
 const char *reader_get_lines(Reader *self, int number){
-    return *array_lines_get(self->lines, number);
+    return *array_char_get(self->lines, number);
 }
 
 
@@ -76,7 +76,7 @@ int reader_append_lines_from_file(Reader *self){
             break;
         }
         char *index = my_strdup(buffer);
-        array_lines_push_back(self->lines, index);
+        array_char_push_back(self->lines, index);
         self->number++;
     }
 
