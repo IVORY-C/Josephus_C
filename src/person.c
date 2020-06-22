@@ -57,11 +57,11 @@ char *person_get_gender(Person *self){
 
 
 //line = "name, age, gender"
-int person_init_from_string(Person *self, char *line){
+int person_init_from_string(Person *self, const char *line){
     char index[20] = {0};
     char *data[3];
     for(int i = 0; i < 3; i++){
-        data[i] = (char *)malloc(sizeof(char));
+        data[i] = (char *)malloc(MAX_CHAR * sizeof(char));
     }
 
     int count_data = 0;

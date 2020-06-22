@@ -3,28 +3,30 @@
 #include <string.h>
 
 #include "../include/macro.h"
+#include "../include/m-array.h"
+#include "../include/m-string.h"
 #include "../include/readers.h"
+
+ARRAY_DEF(array_lines, const char *, M_CSTR_OPLIST)
 
 struct _Reader{
     int capacity;
     int number;
     char *path;
-    char *lines[100];
+    array_lines_t lines;
 };
 
 Reader *reader_create(void){
     struct _Reader *self = (struct _Reader *)malloc(sizeof(struct _Reader));
     self->path = (char *)malloc(MAX_CHAR * sizeof(char));
-    // self->lines = (char **)malloc(100 * sizeof(char *));
 
+    array_lines_init(self->lines);
     return self;
 }
 
 int reader_destroy(Reader *self){
-    for(int i = 0; i < self->number; i++){
-        free(self->lines[i]);
-    }
-    free(self->lines);
+    array_lines_clear(self->lines);
+
     free(self->path);
     free(self);
 
@@ -50,8 +52,19 @@ char *reader_get_path(Reader *self){
     return self->path;
 }
 
-char **reader_get_lines(Reader *self){
-    return self->lines;
+const char *reader_get_lines(Reader *self, int number){
+    return *array_lines_get(self->lines, number);
+}
+
+
+/* Helper function strdup */
+static char *my_strdup(const char *p)
+{
+  size_t s = strlen(p);
+  char *d= malloc(s+1);
+  if(!d) abort();
+  strcpy(d, p);
+  return d;
 }
 
 int reader_append_lines_from_file(Reader *self){
@@ -62,8 +75,8 @@ int reader_append_lines_from_file(Reader *self){
         if(self->number == self->capacity){
             break;
         }
-        self->lines[self->number] = (char *)malloc(MAX_CHAR * sizeof(char));
-        strcpy(self->lines[self->number], buffer);
+        char *index = my_strdup(buffer);
+        array_lines_push_back(self->lines, index);
         self->number++;
     }
 
@@ -72,21 +85,3 @@ int reader_append_lines_from_file(Reader *self){
     return SUCCESS;
 }
 
-
-
-// int readers_set_people_from_txt_or_csv(Person **people, char *path){
-//     FILE *fp = fopen(path, "r");
-//     char *buffer = (char *)malloc(MAX_CHAR * sizeof(char));
-
-//     int count = 0;
-//     while(fgets(buffer, 256, fp) != NULL){
-//         people[count] = person_create();
-//         person_set_from_string(people[count], buffer);
-//         count++;
-//     }
-
-//     fclose(fp);
-//     free(buffer);
-
-//     return SUCCESS;
-// }

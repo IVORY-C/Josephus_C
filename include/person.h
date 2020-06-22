@@ -15,7 +15,7 @@ int person_get_age(Person *self);
 
 char *person_get_gender(Person *self);
 
-int person_init_from_string(Person *self, char *line);
+int person_init_from_string(Person *self, const char *line);
 
 int person_print_data(Person *self); 
 #endif 

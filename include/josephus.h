@@ -7,9 +7,9 @@ typedef struct _Josephus Josephus;
 
 Josephus *josephus_create(void);
 
-int josephus_init(Josephus *self, int start, int step, int capacity);
-
 int josephus_destroy(Josephus *self);
+
+int josephus_init(Josephus *self, int start, int step, int capacity);
 
 int josephus_append(Josephus *self, Person *someone);
 
@@ -21,7 +21,9 @@ int josephus_get_start(Josephus *self);
 
 int josephus_get_step(Josephus *self);
 
-int josephus_get_number(Josephus *self);
+int josephus_get_capacity(Josephus *self);
+
+int josephus_get_size_of_people(Josephus *self);
 
 Person *josephus_output_next(Josephus *self);
 

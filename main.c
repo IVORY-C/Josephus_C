@@ -14,10 +14,9 @@ int main(){
     reader_init(reader, 20, "data/people.csv");
     reader_append_lines_from_file(reader);
 
-    char **lines = reader_get_lines(reader);
     printf("----------\nThe lines:\n");
     for(int i = 0; i < reader_get_number(reader); i++){
-        printf("%s", lines[i]);
+        printf("%s", reader_get_lines(reader, i));
     }
     printf("----------\n");
 
@@ -27,7 +26,7 @@ int main(){
 
     for(int i = 0; i < reader_get_number(reader); i++){
         Person *someone = person_create();
-        person_init_from_string(someone, lines[i]);
+        person_init_from_string(someone, reader_get_lines(reader, i));
         josephus_append(ring, someone);
     }
 
@@ -38,7 +37,7 @@ int main(){
     // 输出结果
     printf("The results:\n");
     Person *next_person = person_create();
-    while(josephus_get_number(ring) > 0){
+    while(josephus_get_size_of_people(ring) > 0){
         next_person = josephus_output_next(ring);
         person_print_data(next_person);
     }
